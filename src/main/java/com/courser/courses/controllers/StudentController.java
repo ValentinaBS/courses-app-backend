@@ -57,7 +57,7 @@ public class StudentController {
             return new ResponseEntity<>("Couldn't find a student with that name and course.", HttpStatus.FORBIDDEN);
         }
 
-        return new ResponseEntity<>(new StudentCourseDTO(studentCourse), HttpStatus.OK);
+        return new ResponseEntity<>(new StudentDTO(student), HttpStatus.OK);
     }
 
     @PostMapping("/students")
@@ -75,7 +75,7 @@ public class StudentController {
         return new ResponseEntity<>("Student has been created successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/students/update/{id}")
+    @PutMapping("/students/{id}")
     public ResponseEntity<Object> updateStudent(
             @RequestBody Student newStudent,
             @PathVariable Long id) {
@@ -97,7 +97,7 @@ public class StudentController {
         return ResponseEntity.ok("Updated student data");
     }
 
-    @PatchMapping("/students/remove/{id}")
+    @PatchMapping("/students/{id}")
     public ResponseEntity<Object> removeStudent(@PathVariable Long id) {
 
         Student student = studentService.findById(id);

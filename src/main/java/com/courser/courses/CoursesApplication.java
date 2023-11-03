@@ -39,7 +39,7 @@ public class CoursesApplication {
 			teacherRepository.save(teacher2);
 
 			Course course1 = new Course("React", "20 weeks", "React JS course", "Mondays and Fridays from 19 to 21", LocalDate.now(), LocalDate.now().plusWeeks(20), 30, 20, CourseShift.NIGHT, "IT", true);
-			Course course2 = new Course("VUE", "15 weeks", "Vue course", "Tuesdays and Thursdays from 10 to 12", LocalDate.now(), LocalDate.now().plusWeeks(15), 40, 28, CourseShift.MORNING, "IT", true);
+			Course course2 = new Course("Vue", "15 weeks", "Vue course", "Tuesdays and Thursdays from 10 to 12", LocalDate.now(), LocalDate.now().plusWeeks(15), 40, 28, CourseShift.MORNING, "IT", true);
 
 			courseRepository.save(course1);
 			courseRepository.save(course2);

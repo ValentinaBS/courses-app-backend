@@ -50,7 +50,7 @@ public class AdminController {
             return new ResponseEntity<>("Email already in use.", HttpStatus.FORBIDDEN);
         }
 
-        adminService.saveAdmin(new Admin(fullName, email, passwordEncoder.encode(password), Role.TEACHER, true));
+        adminService.saveAdmin(new Admin(fullName, email, passwordEncoder.encode(password), Role.ADMIN, true));
         return new ResponseEntity<>("Admin has been created successfully", HttpStatus.CREATED);
     }
 

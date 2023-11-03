@@ -57,7 +57,7 @@ public class TeacherController {
 
         Teacher oldTeacher = teacherService.findById(id);
         if (oldTeacher == null) {
-            return new ResponseEntity<>("Couldn't find a student to update with that id.", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Couldn't find a teacher to update with that id.", HttpStatus.FORBIDDEN);
         }
         if (newTeacher.getRole() != Role.TEACHER) {
             return new ResponseEntity<>("This user is not a teacher.", HttpStatus.FORBIDDEN);
@@ -72,7 +72,7 @@ public class TeacherController {
         return ResponseEntity.ok("Updated teacher data");
     }
 
-    @PatchMapping("/teachers/remove/{id}")
+    @PatchMapping("/teachers/{id}")
     public ResponseEntity<Object> removeTeacher(@PathVariable Long id) {
 
         Teacher teacher = teacherService.findById(id);
@@ -86,32 +86,6 @@ public class TeacherController {
         teacher.setActive(false);
         teacherService.saveTeacher(teacher);
 
-        return new ResponseEntity<>("Student removed successfully", HttpStatus.OK);
-    }
-
-    @PatchMapping("/teachers/removeCourse/{id}")
-    public ResponseEntity<Object> removeTeacherCourse(@PathVariable Long id, @RequestParam Long courseId) {
-
-        Course course = courseService.findById(id);
-        if(course == null) {
-            return new ResponseEntity<>("This course doesn't exist.", HttpStatus.FORBIDDEN);
-        }
-        Teacher teacher = teacherService.findById(id);
-        if(teacher == null) {
-            return new ResponseEntity<>("This teacher doesn't exist.", HttpStatus.FORBIDDEN);
-        }
-        if(course.getTeacherCourses() == null){
-            return new ResponseEntity<>("This course doesn't have a teacher.", HttpStatus.FORBIDDEN);
-        }
-        if(teacher.getTeacherCourses() == null){
-            return new ResponseEntity<>("This teacher doesn't have a course.", HttpStatus.FORBIDDEN);
-        }
-
-        course.setTeacherCourses(null);
-        teacher.setTeacherCourses(null);
-        courseService.saveCourse(course);
-        teacherService.saveTeacher(teacher);
-
-        return new ResponseEntity<>("Teacher has been removed successfully from the course", HttpStatus.OK);
+        return new ResponseEntity<>("Teacher removed successfully", HttpStatus.OK);
     }
 }

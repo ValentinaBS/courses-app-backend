@@ -19,6 +19,7 @@ public class CourseDTO {
     private String category;
     private Boolean active;
 
+    public CourseDTO() {}
     public CourseDTO(Course course) {
         this.id = course.getId();
         this.name = course.getName();

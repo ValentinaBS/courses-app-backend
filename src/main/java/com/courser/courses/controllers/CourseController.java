@@ -39,7 +39,7 @@ public class CourseController {
         return new ResponseEntity<>("A new course has been created successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/courses/update/{id}")
+    @PutMapping("/courses/{id}")
     public ResponseEntity<Object> updateCourse(
             @RequestBody Course newCourse,
             @PathVariable Long id) {
@@ -65,7 +65,7 @@ public class CourseController {
         return ResponseEntity.ok("Updated course data");
     }
 
-    @PatchMapping("/courses/remove/{id}")
+    @PatchMapping("/courses/{id}")
     public ResponseEntity<Object> removeCourse(@PathVariable Long id) {
 
         Course course = courseService.findById(id);
