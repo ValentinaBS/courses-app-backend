@@ -1,7 +1,7 @@
 package com.courser.courses.services.implement;
 
 import com.courser.courses.dtos.AdminDTO;
-import com.courser.courses.models.Admin;
+import com.courser.courses.models.subclass.Admin;
 import com.courser.courses.repositories.AdminRepository;
 import com.courser.courses.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;

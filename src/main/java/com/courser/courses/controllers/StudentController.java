@@ -1,11 +1,12 @@
 package com.courser.courses.controllers;
 
-import com.courser.courses.dtos.StudentCourseDTO;
 import com.courser.courses.dtos.StudentDTO;
 import com.courser.courses.models.Course;
-import com.courser.courses.models.Role;
-import com.courser.courses.models.Student;
+import com.courser.courses.models.enums.Role;
+import com.courser.courses.models.subclass.Student;
 import com.courser.courses.models.StudentCourse;
+import com.courser.courses.models.supclass.Person;
+import com.courser.courses.repositories.PersonRepository;
 import com.courser.courses.services.CourseService;
 import com.courser.courses.services.StudentCourseService;
 import com.courser.courses.services.StudentService;
@@ -25,7 +26,8 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private CourseService courseService;
-
+    @Autowired
+    private PersonRepository personRepository;
     @Autowired
     private StudentCourseService studentCourseService;
     @Autowired
@@ -62,7 +64,7 @@ public class StudentController {
 
     @PostMapping("/students")
     public ResponseEntity<Object> registerStudent(
-            @RequestParam String fullName, @RequestParam String email, @RequestParam String password) {
+            @RequestParam String fullName, @RequestParam String email, @RequestParam String password, @RequestParam String description) {
 
         if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Please don't leave any empty fields.", HttpStatus.FORBIDDEN);
@@ -71,7 +73,7 @@ public class StudentController {
             return new ResponseEntity<>("Email already in use.", HttpStatus.FORBIDDEN);
         }
 
-        studentService.saveStudent(new Student(fullName, email, passwordEncoder.encode(password), Role.STUDENT, true));
+        studentService.saveStudent(new Student(fullName, email, passwordEncoder.encode(password), Role.STUDENT, true, description));
         return new ResponseEntity<>("Student has been created successfully", HttpStatus.CREATED);
     }
 

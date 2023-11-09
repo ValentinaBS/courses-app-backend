@@ -1,6 +1,6 @@
 package com.courser.courses.repositories;
 
-import com.courser.courses.models.Teacher;
+import com.courser.courses.models.subclass.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

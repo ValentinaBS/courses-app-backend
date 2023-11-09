@@ -1,7 +1,7 @@
 package com.courser.courses.services.implement;
 
 import com.courser.courses.dtos.TeacherDTO;
-import com.courser.courses.models.Teacher;
+import com.courser.courses.models.subclass.Teacher;
 import com.courser.courses.repositories.TeacherRepository;
 import com.courser.courses.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;

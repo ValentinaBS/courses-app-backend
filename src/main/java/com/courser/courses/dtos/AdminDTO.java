@@ -1,7 +1,7 @@
 package com.courser.courses.dtos;
 
-import com.courser.courses.models.Admin;
-import com.courser.courses.models.Role;
+import com.courser.courses.models.subclass.Admin;
+import com.courser.courses.models.enums.Role;
 
 public class AdminDTO {
     private long id;
@@ -10,6 +10,7 @@ public class AdminDTO {
     private String password;
     private Role role;
     private Boolean active;
+    private String area;
 
     public AdminDTO(Admin admin) {
         this.id = admin.getId();
@@ -18,6 +19,7 @@ public class AdminDTO {
         this.password = admin.getPassword();
         this.role = admin.getRole();
         this.active = admin.getActive();
+        this.area = admin.getArea();
     }
 
     public long getId() {
@@ -42,5 +44,9 @@ public class AdminDTO {
 
     public Boolean getActive() {
         return active;
+    }
+
+    public String getArea() {
+        return area;
     }
 }

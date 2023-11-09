@@ -1,6 +1,11 @@
 package com.courser.courses;
 
 import com.courser.courses.models.*;
+import com.courser.courses.models.enums.CourseShift;
+import com.courser.courses.models.enums.Role;
+import com.courser.courses.models.subclass.Admin;
+import com.courser.courses.models.subclass.Student;
+import com.courser.courses.models.subclass.Teacher;
 import com.courser.courses.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,17 +28,17 @@ public class CoursesApplication {
 	@Bean
 	public CommandLineRunner initData(StudentRepository studentRepository, AdminRepository adminRepository, CourseRepository courseRepository, StudentCourseRepository studentCourseRepository, TeacherRepository teacherRepository, TeacherCourseRepository teacherCourseRepository) {
 		return (args) -> {
-			Admin admin = new Admin("admin admin", "admin@mindhub.com", passwordEncoder.encode("admin123"), Role.ADMIN, true);
+			Admin admin = new Admin("admin admin", "admin@mindhub.com", passwordEncoder.encode("admin123"), Role.ADMIN, true, "IT");
 			adminRepository.save(admin);
 
-			Student student1 = new Student("Melba Morel", "melba@mindhub.com", passwordEncoder.encode("MelBA98!"), Role.STUDENT ,true);
-			Student student2 = new Student("Alex Fulsch", "alexfu@mindhub.com", passwordEncoder.encode("a"), Role.STUDENT ,true);
+			Student student1 = new Student("Melba Morel", "melba@mindhub.com", passwordEncoder.encode("MelBA98!"), Role.STUDENT ,true, "I am a Computer Science major");
+			Student student2 = new Student("Alex Fulsch", "alexfu@mindhub.com", passwordEncoder.encode("a"), Role.STUDENT ,true, "I love tech!");
 
 			studentRepository.save(student1);
 			studentRepository.save(student2);
 
-			Teacher teacher1 = new Teacher("Mary Jones", "mary@gmail.com", passwordEncoder.encode("mary123"), Role.TEACHER ,true);
-			Teacher teacher2 = new Teacher("James White", "ames@gmail.com", passwordEncoder.encode("James3902"), Role.TEACHER ,true);
+			Teacher teacher1 = new Teacher("Mary Jones", "mary@gmail.com", passwordEncoder.encode("mary123"), Role.TEACHER ,true, "Computer Science");
+			Teacher teacher2 = new Teacher("James White", "ames@gmail.com", passwordEncoder.encode("James3902"), Role.TEACHER ,true,  "Web Development");
 
 			teacherRepository.save(teacher1);
 			teacherRepository.save(teacher2);

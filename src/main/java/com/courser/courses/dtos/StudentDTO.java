@@ -1,7 +1,7 @@
 package com.courser.courses.dtos;
 
-import com.courser.courses.models.Role;
-import com.courser.courses.models.Student;
+import com.courser.courses.models.enums.Role;
+import com.courser.courses.models.subclass.Student;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,6 +13,7 @@ public class StudentDTO {
     private String password;
     private Role role;
     private Boolean active;
+    private String description;
     private Set<StudentCourseDTO> studentCourses;
 
     public StudentDTO(Student student) {
@@ -22,6 +23,7 @@ public class StudentDTO {
         this.password = student.getPassword();
         this.role = student.getRole();
         this.active = student.getActive();
+        this.description = student.getDescription();
         this.studentCourses = student.getStudentCourses().stream().map(StudentCourseDTO::new).collect(Collectors.toSet());
     }
 
@@ -47,6 +49,10 @@ public class StudentDTO {
 
     public Boolean getActive() {
         return active;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Set<StudentCourseDTO> getStudentCourses() {

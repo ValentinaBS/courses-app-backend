@@ -1,8 +1,8 @@
 package com.courser.courses.controllers;
 
 import com.courser.courses.dtos.AdminDTO;
-import com.courser.courses.models.Admin;
-import com.courser.courses.models.Role;
+import com.courser.courses.models.subclass.Admin;
+import com.courser.courses.models.enums.Role;
 import com.courser.courses.services.AdminService;
 import com.courser.courses.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ public class AdminController {
 
     @PostMapping("/admins")
     public ResponseEntity<Object> registerAdmin(
-            @RequestParam String fullName, @RequestParam String email, @RequestParam String password, Authentication authentication) {
+            @RequestParam String fullName, @RequestParam String email, @RequestParam String password, @RequestParam String area, Authentication authentication) {
 
         if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Please don't leave any empty fields.", HttpStatus.FORBIDDEN);
@@ -50,7 +50,7 @@ public class AdminController {
             return new ResponseEntity<>("Email already in use.", HttpStatus.FORBIDDEN);
         }
 
-        adminService.saveAdmin(new Admin(fullName, email, passwordEncoder.encode(password), Role.ADMIN, true));
+        adminService.saveAdmin(new Admin(fullName, email, passwordEncoder.encode(password), Role.ADMIN, true, area));
         return new ResponseEntity<>("Admin has been created successfully", HttpStatus.CREATED);
     }
 

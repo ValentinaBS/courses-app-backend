@@ -1,8 +1,8 @@
 package com.courser.courses.controllers;
 
+import com.courser.courses.dtos.CourseCreationDTO;
 import com.courser.courses.dtos.CourseDTO;
 import com.courser.courses.models.Course;
-import com.courser.courses.models.Teacher;
 import com.courser.courses.services.CourseService;
 import com.courser.courses.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +27,15 @@ public class CourseController {
     }
 
     @PostMapping("/courses")
-    public ResponseEntity<Object> createCourse(@RequestBody CourseDTO courseDTO) {
+    public ResponseEntity<Object> createCourse(@RequestBody CourseCreationDTO courseCreationDTO) {
 
-        if (courseService.existsByName(courseDTO.getName())) {
+        if (courseService.existsByName(courseCreationDTO.getName())) {
             return new ResponseEntity<>("There is an existing course with the same name.", HttpStatus.FORBIDDEN);
         }
 
-        courseService.saveCourse(new Course(courseDTO.getName(), courseDTO.getTotalTime(), courseDTO.getDescription(),
-                courseDTO.getSchedule(), courseDTO.getStartDate(), courseDTO.getEndDate(), courseDTO.getMaximumQuota(),
-                courseDTO.getCurrentQuota(), courseDTO.getShift(), courseDTO.getCategory(), true));
+        courseService.saveCourse(new Course(courseCreationDTO.getName(), courseCreationDTO.getTotalTime(), courseCreationDTO.getDescription(),
+                courseCreationDTO.getSchedule(), courseCreationDTO.getStartDate(), courseCreationDTO.getEndDate(), courseCreationDTO.getMaximumQuota(),
+                courseCreationDTO.getCurrentQuota(), courseCreationDTO.getShift(), courseCreationDTO.getCategory(), true));
         return new ResponseEntity<>("A new course has been created successfully", HttpStatus.CREATED);
     }
 

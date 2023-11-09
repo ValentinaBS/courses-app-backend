@@ -1,9 +1,8 @@
 package com.courser.courses.controllers;
 
 import com.courser.courses.dtos.TeacherDTO;
-import com.courser.courses.models.Course;
-import com.courser.courses.models.Role;
-import com.courser.courses.models.Teacher;
+import com.courser.courses.models.enums.Role;
+import com.courser.courses.models.subclass.Teacher;
 import com.courser.courses.services.CourseService;
 import com.courser.courses.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +36,7 @@ public class TeacherController {
 
     @PostMapping("/teachers")
     public ResponseEntity<Object> registerTeacher(
-            @RequestParam String fullName, @RequestParam String email, @RequestParam String password) {
+            @RequestParam String fullName, @RequestParam String email, @RequestParam String password, @RequestParam String major) {
 
         if (fullName.isBlank() || email.isBlank() || password.isBlank()) {
             return new ResponseEntity<>("Please don't leave any empty fields.", HttpStatus.FORBIDDEN);
@@ -46,7 +45,7 @@ public class TeacherController {
             return new ResponseEntity<>("Email already in use.", HttpStatus.FORBIDDEN);
         }
 
-        teacherService.saveTeacher(new Teacher(fullName, email, passwordEncoder.encode(password), Role.TEACHER, true));
+        teacherService.saveTeacher(new Teacher(fullName, email, passwordEncoder.encode(password), Role.TEACHER, true, major));
         return new ResponseEntity<>("Teacher has been created successfully", HttpStatus.CREATED);
     }
 

@@ -1,27 +1,23 @@
-package com.courser.courses.models;
+package com.courser.courses.models.supclass;
 
-import org.hibernate.annotations.GenericGenerator;
+import com.courser.courses.models.enums.Role;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class Admin {
+@Inheritance( strategy = InheritanceType.JOINED )
+public class Person {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    private long id;
-    private String fullName;
-    private String email;
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String fullName, email, password;
     private Role role;
     private Boolean active;
 
-    public Admin() {}
+    public Person(){}
 
-    public Admin(String fullName, String email, String password, Role role, Boolean active) {
+    public Person(String fullName, String email, String password, Role role, Boolean active) {
         this.fullName = fullName;
         this.email = email;
         this.password = password;
@@ -29,7 +25,7 @@ public class Admin {
         this.active = active;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

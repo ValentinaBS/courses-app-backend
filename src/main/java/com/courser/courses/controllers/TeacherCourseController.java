@@ -1,12 +1,10 @@
 package com.courser.courses.controllers;
 
 import com.courser.courses.dtos.TeacherCourseDTO;
-import com.courser.courses.dtos.TeacherDTO;
 import com.courser.courses.models.Course;
-import com.courser.courses.models.Role;
-import com.courser.courses.models.Teacher;
+import com.courser.courses.models.enums.Role;
+import com.courser.courses.models.subclass.Teacher;
 import com.courser.courses.models.TeacherCourse;
-import com.courser.courses.repositories.TeacherCourseRepository;
 import com.courser.courses.services.CourseService;
 import com.courser.courses.services.TeacherCourseService;
 import com.courser.courses.services.TeacherService;
@@ -63,7 +61,7 @@ public class TeacherCourseController {
         if (teacherCourse.getTeacher() == null) {
             return new ResponseEntity<>("This course doesn't have a teacher.", HttpStatus.FORBIDDEN);
         }
-        Teacher defaultTeacher = new Teacher("No Teacher", "teacher@email.com", "defaultTeacher123", Role.TEACHER, false);
+        Teacher defaultTeacher = new Teacher("No Teacher", "teacher@email.com", "defaultTeacher123", Role.TEACHER, false, "No Major");
         teacherService.saveTeacher(defaultTeacher);
 
         teacherCourse.setTeacher(defaultTeacher);

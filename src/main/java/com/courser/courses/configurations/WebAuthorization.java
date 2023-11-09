@@ -21,17 +21,21 @@ public class WebAuthorization {
 
         http.authorizeRequests()
 
-                .antMatchers(HttpMethod.POST, "/api/clients", "/api/login", "/api/logout").permitAll()
-                .antMatchers("/web/index.html", "/web/global.css", "/web/styles/**", "/web/js/**", "/web/images/**", "/api/loans").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/students", "/api/teachers", "/api/login", "/api/logout").permitAll()
+                .antMatchers("/api/courses").authenticated()
 
-                .antMatchers(HttpMethod.POST, "/api/loans/create").hasAuthority("ADMIN")
-                .antMatchers("/rest/**", "/h2-console/**", "/web/adminPages/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/admins", "/api/courses").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/admins/**", "/api/courses/**", "/api/students/**", "/api/teachers/**", "/api/studentCourse/**", "/api/teacherCourse/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/admins/**", "/api/courses/**", "/api/students/**", "/api/teachers/**", "/api/teacherCourse", "/api/studentCourse").hasAuthority("ADMIN")
+                .antMatchers("/rest/**", "/h2-console/**", "/api/admins", "/admins/**", "/api/teachers", "/api/students", "/api/students/search", "/api/studentCourse", "/api/teacherCourse").hasAuthority("ADMIN")
 
-                .antMatchers(HttpMethod.POST, "/api/loans", "/api/transactions").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/{id}", "/api/clients/current/accounts/{id}", "/api/loans/{id}").hasAuthority("CLIENT")
-                .antMatchers("/web/pages/**", "/api/clients/current", "/api/clients/current/**", "/api/accounts/{id}", "/api/transactions").hasAuthority("CLIENT");
+                .antMatchers(HttpMethod.POST, "/api/teacherCourse").hasAuthority("TEACHER")
+                .antMatchers("/api/teachers/current").hasAuthority("TEACHER")
 
-                //.anyRequest().denyAll();
+                .antMatchers(HttpMethod.POST, "/api/studentCourse").hasAuthority("STUDENT")
+                .antMatchers("/api/students/current").hasAuthority("STUDENT")
+
+                .anyRequest().denyAll();
 
         http.formLogin()
 

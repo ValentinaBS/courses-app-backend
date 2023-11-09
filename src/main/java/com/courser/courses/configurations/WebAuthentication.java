@@ -1,11 +1,10 @@
 package com.courser.courses.configurations;
 
-import com.courser.courses.models.Admin;
-import com.courser.courses.models.Student;
-import com.courser.courses.models.Teacher;
-import com.courser.courses.repositories.AdminRepository;
-import com.courser.courses.repositories.StudentRepository;
-import com.courser.courses.repositories.TeacherRepository;
+import com.courser.courses.models.subclass.Admin;
+import com.courser.courses.models.subclass.Student;
+import com.courser.courses.models.subclass.Teacher;
+import com.courser.courses.models.supclass.Person;
+import com.courser.courses.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,13 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
-
     @Autowired
-    private AdminRepository adminRepository;
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private TeacherRepository teacherRepository;
+    private PersonRepository personRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,20 +31,18 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
 
         auth.userDetailsService(inputEmail-> {
 
-            Admin admin = adminRepository.findByEmail(inputEmail);
-            Teacher teacher = teacherRepository.findByEmail(inputEmail);
-            Student student = studentRepository.findByEmail(inputEmail);
+            Person person = personRepository.findByEmail(inputEmail);
 
-            if (admin != null) {
-                return new User(admin.getEmail(), admin.getPassword(),
+            if (person instanceof Admin) {
+                return new User(person.getEmail(), person.getPassword(),
                         AuthorityUtils.createAuthorityList("ADMIN"));
             }
-            if (teacher != null) {
-                return new User(teacher.getEmail(), teacher.getPassword(),
+            if (person instanceof Teacher) {
+                return new User(person.getEmail(), person.getPassword(),
                         AuthorityUtils.createAuthorityList("TEACHER"));
             }
-            if (student != null) {
-                return new User(student.getEmail(), student.getPassword(),
+            if (person instanceof Student) {
+                return new User(person.getEmail(), person.getPassword(),
                         AuthorityUtils.createAuthorityList("STUDENT"));
             }
 

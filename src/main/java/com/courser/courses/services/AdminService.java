@@ -1,7 +1,7 @@
 package com.courser.courses.services;
 
 import com.courser.courses.dtos.AdminDTO;
-import com.courser.courses.models.Admin;
+import com.courser.courses.models.subclass.Admin;
 
 import java.util.Set;
 

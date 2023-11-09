@@ -1,7 +1,7 @@
 package com.courser.courses.services;
 
 import com.courser.courses.dtos.TeacherDTO;
-import com.courser.courses.models.Teacher;
+import com.courser.courses.models.subclass.Teacher;
 
 import java.util.Set;
 

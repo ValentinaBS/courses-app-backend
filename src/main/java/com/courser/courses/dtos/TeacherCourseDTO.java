@@ -4,14 +4,14 @@ import com.courser.courses.models.TeacherCourse;
 
 public class TeacherCourseDTO {
     private long id;
-    private long teacherId;
-    private long courseId;
+    private String teacherName;
+    private String courseName;
     private boolean completed;
 
     public TeacherCourseDTO(TeacherCourse teacherCourse) {
         this.id = teacherCourse.getId();
-        this.teacherId = teacherCourse.getTeacher().getId();
-        this.courseId = teacherCourse.getCourse().getId();
+        this.teacherName = teacherCourse.getTeacher().getFullName();
+        this.courseName = teacherCourse.getCourse().getName();
         this.completed = teacherCourse.isCompleted();
     }
 
@@ -19,12 +19,12 @@ public class TeacherCourseDTO {
         return id;
     }
 
-    public long getTeacherId() {
-        return teacherId;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public long getCourseId() {
-        return courseId;
+    public String getCourseName() {
+        return courseName;
     }
 
     public boolean isCompleted() {

@@ -1,6 +1,6 @@
 package com.courser.courses.repositories;
 
-import com.courser.courses.models.Admin;
+import com.courser.courses.models.subclass.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

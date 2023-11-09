@@ -1,4 +1,4 @@
-package com.courser.courses.models;
+package com.courser.courses.models.enums;
 
 public enum CourseShift {
     MORNING,

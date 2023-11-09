@@ -5,7 +5,7 @@ import com.courser.courses.models.enums.CourseShift;
 
 import java.time.LocalDate;
 
-public class CourseDTO {
+public class CourseCreationDTO {
     private long id;
     private String name;
     private String totalTime;
@@ -19,7 +19,7 @@ public class CourseDTO {
     private String category;
     private Boolean active;
 
-    public CourseDTO(Course course) {
+    public CourseCreationDTO(Course course) {
         this.id = course.getId();
         this.name = course.getName();
         this.totalTime = course.getTotalTime();

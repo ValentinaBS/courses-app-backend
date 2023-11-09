@@ -1,8 +1,7 @@
 package com.courser.courses.services;
 
 import com.courser.courses.dtos.StudentDTO;
-import com.courser.courses.models.Course;
-import com.courser.courses.models.Student;
+import com.courser.courses.models.subclass.Student;
 
 import java.util.Set;
 

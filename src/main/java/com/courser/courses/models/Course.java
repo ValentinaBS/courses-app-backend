@@ -1,5 +1,6 @@
 package com.courser.courses.models;
 
+import com.courser.courses.models.enums.CourseShift;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
